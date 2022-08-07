@@ -2,6 +2,7 @@
     background-color: $white;
     border-radius: 4px;
     box-shadow: 0px 0px 5px 2px $box-shadow;
+    cursor: pointer;
 
     &__header {
        border-bottom: 1px solid $divider;
@@ -41,16 +42,18 @@
 
     &__additional-info {
         text-align: center;
-        color: $dark-grey;
+        color: $grey;
         width: 50%;
+        font-size: 12px;
 
         strong {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 700;
+            color: $dark-grey;
         }
 
         span {
-            color: $dark-grey;
+            color: $grey;
             display: block;
             font-size: 14px;
             text-transform: uppercase;
@@ -63,7 +66,7 @@
     }
 
     &__updated {
-        color:  $dark-grey;
+        color:  $grey;
         display: block;
         font-size: 10px;
         text-align: center;

@@ -1,5 +1,9 @@
 <template>
-  <div class="weather-card">
+  <div
+    class="weather-card"
+    @mouseover="showAddInfo = true"
+    @mouseleave="showAddInfo = false"
+  >
     <div class="weather-card__header">
       <h2 class="weather-card__title">
         {{ cardData.city }}, {{ cardData.country }}
@@ -11,14 +15,16 @@
       </span>
     </div>
     <div class="weather-card__footer">
-      <div class="weather-card__additional-infos">
+      <div v-show="showAddInfo" class="weather-card__additional-infos">
         <div class="weather-card__additional-info">
           <span>hummidity</span>
-          <strong>{{ cardData.hummidity }}</strong>%
+          <strong>{{ cardData.hummidity }}</strong
+          >%
         </div>
         <div class="weather-card__additional-info">
           <span>pressure</span>
-          <strong>{{ cardData.pressure }}</strong>hPa
+          <strong>{{ cardData.pressure }}</strong
+          >hPa
         </div>
       </div>
       <span class="weather-card__updated"
@@ -35,6 +41,11 @@ export default {
       type: Object,
       default: () => {},
     },
+  },
+  data() {
+    return {
+      showAddInfo: false,
+    };
   },
   computed: {
     temperatureClass() {
