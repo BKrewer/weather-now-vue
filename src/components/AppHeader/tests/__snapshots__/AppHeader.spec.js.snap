@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppHeader.vue renders correctly 1`] = `
+<header
+  class="app-header"
+>
+  <img
+    alt="Weathernow"
+    class="app-header__logo"
+    src="@/assets/logo.svg"
+  />
+</header>
+`;
