@@ -1,52 +1,20 @@
 <template>
   <div id="app">
     <app-header />
-    <div class="cards">
-      <weather-card v-for="card in cards" :key="card.city" :cardData="card"/>
-    </div>
+    <cards-container />
   </div>
 </template>
 
 <script>
 import AppHeader from './components/AppHeader/AppHeader.vue'
-import WeatherCard from './components/WeatherCard/WeatherCard.vue'
+import CardsContainer from './components/CardsContainer/CardsContainer.vue'
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    WeatherCard
+    CardsContainer
   },
-  data() {
-    return {
-      cards: [
-        {
-          city: 'Nuuk',
-          country: 'GL',
-          temperature: -4,
-          hummidity: 75,
-          pressure: 892,
-          updatedAt: "02:48:32 PM"
-        },
-        {
-          city: 'Urubici',
-          country: 'BR',
-          temperature: 19,
-          hummidity: 75,
-          pressure: 892,
-          updatedAt: "02:48:32 PM"
-        },
-        {
-          city: 'Nairobi',
-          country: 'KE',
-          temperature: 31,
-          hummidity: 75,
-          pressure: 892,
-          updatedAt: "02:48:32 PM"
-        }
-      ]
-    }
-  }
 }
 </script>
 
