@@ -1,6 +1,7 @@
 body {
     box-sizing: border-box;
     font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
     margin: 0;
     padding: 0;
 }
@@ -21,11 +22,20 @@ body {
         background-color: transparent;
         justify-content: center;
         align-items: center;
+        max-width: 1020px;
+        width: 100%;
+        justify-content: space-between;
 
         .weather-card {
-            width: 300px;
-            height: 350px;
-            margin: 15px;
+            max-width: 300px;
+            width: 100%;
+            margin: 20px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .cards {
+            flex-direction: column;
         }
     }
 }
