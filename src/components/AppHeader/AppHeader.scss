@@ -1,0 +1,13 @@
+.app-header {
+    background-color: $white;
+    box-shadow: 0px 3px 0px 0px $box-shadow;
+    display: flex;
+    height: 70px;
+    justify-content: center;
+    width: 100%;
+
+    &__logo {
+        max-width: 200px;
+        width: 100%;
+    }
+}

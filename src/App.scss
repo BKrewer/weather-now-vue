@@ -1,0 +1,31 @@
+body {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#app {
+    background-color: $app-bg;
+    display: flex;
+    height: auto;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+
+    .cards {
+        display: flex;
+        flex-direction: row;
+        height: calc(100vh - 70px);
+        background-color: transparent;
+        justify-content: center;
+        align-items: center;
+
+        .weather-card {
+            width: 300px;
+            height: 350px;
+            margin: 15px;
+        }
+    }
+}

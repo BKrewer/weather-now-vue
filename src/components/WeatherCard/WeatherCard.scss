@@ -1,0 +1,46 @@
+.weather-card {
+    background-color: $white;
+    border-radius: 4px;
+
+    &__header {
+       border-bottom: 2px solid $divider;
+       padding: 15px;
+    }
+
+    &__title {
+        color: $dark-grey;
+        font-size: 20px;
+        font-weight: 500;
+        margin: 0;
+        text-align: center;
+    }
+
+    &__temperature {
+        color: $normal-temperature;
+        display: block;
+        font-size: 92px;
+        font-weight: 500;
+        padding: 20px;
+        text-align: center;
+
+        &--cold {
+            color: $cold-temperature;
+        }
+
+        &--hot {
+            color: $hot-temperature;
+        }
+    }
+
+    &__footer {
+        background-color: $card-footer-bg;
+        padding: 20px;
+    }
+
+    &__updated {
+        color:  $dark-grey;
+        display: block;
+        font-size: 10px;
+        text-align: center;
+    }
+}

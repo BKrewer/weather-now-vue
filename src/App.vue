@@ -1,26 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Weathernow" src="./assets/logo.svg">
+    <app-header />
+    <div class="cards">
+      <weather-card />
+    <weather-card />
+    <weather-card />
+    </div>
     
   </div>
 </template>
 
 <script>
+import AppHeader from './components/AppHeader/AppHeader.vue'
+import WeatherCard from './components/WeatherCard/WeatherCard.vue'
 
 export default {
   name: 'App',
   components: {
+    AppHeader,
+    WeatherCard
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss" src="./App.scss" />
