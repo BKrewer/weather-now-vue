@@ -22,7 +22,8 @@ export default new Vuex.Store({
       }
     ],
     loading: false,
-    error: false
+    error: false,
+    updatedAt: null,
   },
   mutations: {
     setWeatherData(state, payload) {
@@ -33,6 +34,9 @@ export default new Vuex.Store({
     },
     setError(state, payload) {
       state.error = payload
+    },
+    setUpdatedAt(state, payload) {
+      state.updatedAt = payload
     }
   },
   actions: {
@@ -41,16 +45,17 @@ export default new Vuex.Store({
 
       const dataCached = getCacheData();
 
-      if (dataCached && validateCacheData(dataCached.updateAt)) {
-        console.log('peguei do cache')
-        commit("setWeatherData", dataCached.list)
+      if (dataCached && validateCacheData(dataCached[3])) {
+        commit('setUpdatedAt', dataCached[3])
+        dataCached.pop();
+
+        commit("setWeatherData", dataCached)
         commit('setLoading', false);
         return;
       }
 
       try {
         const { data } = await requestWeather(requestString);
-
         if (!data) {
           commit('setLoading', false);
           commit('setError', true);
@@ -58,9 +63,16 @@ export default new Vuex.Store({
         }
 
         const dataFormatted = formatData(data.list);
-        console.log('fiz a request')
+
+        const dtNow = Date.now();
+        dataFormatted.push(dtNow);
+
         saveCacheData(dataFormatted);
+
+        dataFormatted.pop();
+
         commit("setWeatherData", dataFormatted)
+        commit('setUpdatedAt', dtNow)
         commit('setLoading', false);
       } catch (error) {
         commit('setLoading', false);

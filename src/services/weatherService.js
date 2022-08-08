@@ -13,12 +13,11 @@ const requestWeather = (requestString) => {
 }
 
 const saveCacheData = (data) => {
-    data.updatedAt = Date.now();
     localStorage.setItem("weathernow", JSON.stringify(data))
 }
 
 const getCacheData = () => {
-    JSON.parse(localStorage.getItem("weathernow"))
+    return JSON.parse(localStorage.getItem("weathernow"))
 }
 
 const validateCacheData = (dtSaved) => {
@@ -27,7 +26,7 @@ const validateCacheData = (dtSaved) => {
 
     const timeDif = dtNow - dtCached
 
-    return Math.round((timeDif / 1000) / 60) <= VUE_APP_TIMER_CACHE
+    return ((timeDif / 1000) / 60) <= VUE_APP_TIMER_CACHE
 }
 
 const formatData = (data) => {

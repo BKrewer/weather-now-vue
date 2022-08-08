@@ -1,6 +1,7 @@
 <template>
   <div
     class="weather-card"
+    :class="{ 'weather-card--with-error': error }"
     @mouseover="showAddInfo = true"
     @mouseleave="showAddInfo = false"
   >
@@ -10,9 +11,11 @@
       </h2>
     </div>
 
+    <weather-error v-if="error && !loading" @newRequest="emitNewRequest" />
+
     <app-loading v-if="loading" />
 
-    <div v-if="updatedAt && !loading" class="weather-card__content">
+    <div v-if="updatedAt && !loading && !error" class="weather-card__content">
       <div class="weather-card__body">
         <span class="weather-card__temperature" :class="temperatureClass">
           {{ cardData.temp }}°
@@ -40,18 +43,17 @@
 <script>
 import { mapState } from "vuex";
 import AppLoading from "../AppLoading/AppLoading.vue";
+import WeatherError from "../WeatherError/WeatherError.vue";
+
 export default {
   components: {
     AppLoading,
+    WeatherError,
   },
   props: {
     cardData: {
       type: Object,
       default: () => {},
-    },
-    updatedAt: {
-      type: Number,
-      default: null,
     },
   },
   data() {
@@ -60,7 +62,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["loading", "error"]),
+    ...mapState(["loading", "error", 'updatedAt']),
     temperatureClass() {
       const temp = this.cardData.temp;
 
@@ -73,6 +75,11 @@ export default {
       }
 
       return "";
+    },
+  },
+  methods: {
+    emitNewRequest() {
+      this.$emit("newRequest");
     },
   },
 };

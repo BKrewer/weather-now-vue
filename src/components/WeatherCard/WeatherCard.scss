@@ -1,12 +1,16 @@
 .weather-card {
     background-color: $white;
     border-radius: 4px;
-    box-shadow: 0px 0px 5px 2px $box-shadow;
+    box-shadow: 3px 3px 8px 2px $box-shadow;
     cursor: pointer;
 
+    &--with-error {
+        cursor: auto;
+    }
+
     &__header {
-       border-bottom: 1px solid $divider;
-       padding: 15px;
+        border-bottom: 1px solid $divider;
+        padding: 15px;
     }
 
     &__title {
@@ -67,14 +71,19 @@
     }
 
     &__updated {
-        color:  $grey;
+        color: $grey;
         display: block;
         font-size: 10px;
         text-align: center;
     }
 
     .app-loading {
-        height: 140px;
+        height: 175px;
+        align-items: center;
+    }
+
+    .weather-error {
+        height: 175px;
         align-items: center;
     }
 }
