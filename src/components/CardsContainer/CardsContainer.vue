@@ -1,46 +1,35 @@
 <template>
   <section class="cards-container">
-    <weather-card v-for="card in cards" :key="card.city" :cardData="card" />
+    <weather-card v-for="weather in weatherData" :key="weather.city" :cardData="weather" :updatedAt="updatedAt" />
   </section>
 </template>
 
 <script>
 import WeatherCard from "@/components/WeatherCard/WeatherCard.vue";
 
+import { mapActions, mapState } from 'vuex';
+
 export default {
   components: {
     WeatherCard,
   },
-  data() {
-    return {
-      cards: [
-        {
-          city: "Nuuk",
-          country: "GL",
-          temperature: -4,
-          hummidity: 75,
-          pressure: 892,
-          updatedAt: "02:48:32 PM",
-        },
-        {
-          city: "Urubici",
-          country: "BR",
-          temperature: 19,
-          hummidity: 75,
-          pressure: 892,
-          updatedAt: "02:48:32 PM",
-        },
-        {
-          city: "Nairobi",
-          country: "KE",
-          temperature: 31,
-          hummidity: 75,
-          pressure: 892,
-          updatedAt: "02:48:32 PM",
-        },
-      ],
-    };
-  }
+  computed: {
+    ...mapState(['weatherData']),
+    updatedAt() {
+      return this.weatherData && this.weatherData.updatedAt;
+    }
+  },
+  mounted() {
+    this.requestWeather();
+  },
+  methods: {
+    ...mapActions(['requestWeatherData']),
+    requestWeather() {
+      this.requestWeatherData('3421319,3445709,184745').then(() => {
+         console.log(this.weatherData,  this.loading, this.error)
+      });
+    },
+  },
 };
 </script>
 
