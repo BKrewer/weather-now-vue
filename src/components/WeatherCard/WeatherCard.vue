@@ -62,11 +62,13 @@ export default {
   computed: {
     ...mapState(["loading", "error"]),
     temperatureClass() {
-      if (this.cardData.temperature <= 5) {
+      const temp = this.cardData.temp;
+
+      if (temp <= 5) {
         return "weather-card__temperature--cold";
       }
 
-      if (this.cardData.temperature > 25) {
+      if (temp > 25) {
         return "weather-card__temperature--hot";
       }
 
