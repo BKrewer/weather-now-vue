@@ -20,6 +20,11 @@ export default {
   components: {
     WeatherCard,
   },
+  data() {
+    return {
+      citiesList: "3421319,3445709,184745"
+    }
+  },
   computed: {
     ...mapState(["weatherData", "updatedAt"]),
   },
@@ -37,7 +42,7 @@ export default {
   methods: {
     ...mapActions(["requestWeatherData"]),
     requestWeather() {
-      this.requestWeatherData("3421319,3445709,184745");
+      this.requestWeatherData(this.citiesList);
     },
   },
 };

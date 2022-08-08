@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import { requestWeather, validateCacheData, getCacheData, saveCacheData, formatData } from "@/services/weatherService";
+import { requestWeather, formatData } from "@/services/weatherService";
+import { saveCacheData, getValidCache } from "@/services/cacheService"
 
 Vue.use(Vuex)
 
@@ -43,9 +44,9 @@ export default new Vuex.Store({
     async requestWeatherData({ commit }, requestString) {
       commit('setLoading', true);
 
-      const dataCached = getCacheData();
+      const dataCached = getValidCache("weathernow");
 
-      if (dataCached && validateCacheData(dataCached[3])) {
+      if (dataCached) {
         commit('setUpdatedAt', dataCached[3])
         dataCached.pop();
 
@@ -67,7 +68,7 @@ export default new Vuex.Store({
         const dtNow = Date.now();
         dataFormatted.push(dtNow);
 
-        saveCacheData(dataFormatted);
+        saveCacheData("weathernow", dataFormatted);
 
         dataFormatted.pop();
 
