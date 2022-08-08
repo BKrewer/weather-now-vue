@@ -6,4 +6,11 @@ describe('WeatherError.vue', () => {
     const wrapper = shallowMount(WeatherError)
     expect(wrapper.element).toMatchSnapshot();
   })
+
+  it("emit event when click try again", () => {
+    const wrapper = shallowMount(WeatherError)
+
+    wrapper.find('button').trigger('click');
+    expect(wrapper.emitted()).toHaveProperty('newRequest');
+  })
 })

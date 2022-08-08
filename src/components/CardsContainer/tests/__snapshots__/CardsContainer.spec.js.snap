@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardsContainer.vue renders correctly 1`] = `
+<section
+  class="cards-container"
+>
+  <weather-card-stub
+    carddata="[object Object]"
+  />
+  <weather-card-stub
+    carddata="[object Object]"
+  />
+  <weather-card-stub
+    carddata="[object Object]"
+  />
+</section>
+`;
