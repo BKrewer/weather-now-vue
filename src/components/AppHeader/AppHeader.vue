@@ -1,6 +1,6 @@
 <template>
   <header class="app-header">
-      <img class="app-header__logo" alt="Weathernow" src="@/assets/logo.svg">
+      <img class="app-header__logo" alt="Weathernow" src="@/assets/images/logo.svg">
   </header>
 </template>
 

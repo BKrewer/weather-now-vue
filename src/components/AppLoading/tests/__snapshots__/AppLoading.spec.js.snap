@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppLoading.vue renders correctly 1`] = `
+<div
+  class="app-loading"
+>
+  <img
+    alt="Loading"
+    class="app-loading__loader"
+    src="@/assets/images/loader.svg"
+  />
+</div>
+`;
