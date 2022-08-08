@@ -31,8 +31,8 @@
             >hPa
           </div>
         </div>
+        <span class="weather-card__updated">Updated at {{ updatedAt | formatTime }}</span>
       </div>
-      <span class="weather-card__updated">Updated at {{ updatedAt }}</span>
     </div>
   </div>
 </template>
