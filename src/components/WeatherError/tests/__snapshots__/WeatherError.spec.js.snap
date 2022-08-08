@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeatherError.vue renders correctly 1`] = `
+<div
+  class="weather-error"
+>
+  <span
+    class="weather-error__message"
+  >
+    Something went wrong
+  </span>
+   
+  <button
+    class="weather-error__reload"
+  >
+    Try Again
+  </button>
+</div>
+`;

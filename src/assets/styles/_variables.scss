@@ -2,6 +2,7 @@
 $white: #ffffff;
 $grey: #B4B4B4;
 $dark-grey: #737c84;
+$warning: #ed1946;
 
 // app
 $app-bg: #f1f1f1;
@@ -12,4 +13,4 @@ $box-shadow: rgba(#333333, 0.1);
 // cards
 $cold-temperature: #69a3ff;
 $normal-temperature: #ff9632;
-$hot-temperature: #ed1946;
+$hot-temperature: $warning;
