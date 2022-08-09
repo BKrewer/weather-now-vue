@@ -33,10 +33,9 @@ export default {
   },
   watch: {
     updatedAt() {
-      const intervalTimer = (VUE_APP_TIMER_CACHE * 1000 * 60) + 10;
       setInterval(() => {
         this.requestWeather();
-      }, intervalTimer);
+      }, VUE_APP_TIMER_CACHE);
     },
   },
   methods: {

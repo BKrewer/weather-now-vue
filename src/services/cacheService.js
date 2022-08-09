@@ -1,5 +1,5 @@
 const {
-    VUE_APP_TIMER_CACHE
+    VUE_APP_MINUTES_VALID_CACHE
 } = process.env;
 
 const saveCacheData = (localStorageKey, data) => {
@@ -16,7 +16,7 @@ const validateCacheData = (dtSaved) => {
 
     const timeDif = dtNow - dtCached
 
-    return ((timeDif / 1000) / 60) <= VUE_APP_TIMER_CACHE
+    return ((timeDif / 1000) / 60) <= VUE_APP_MINUTES_VALID_CACHE
 }
 
 const getValidCache = (localStorageKey) => {
