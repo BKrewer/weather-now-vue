@@ -1,8 +1,8 @@
-import Vue from 'vue'
+import { createApp, h} from 'vue';
 import App from './App.vue'
 import store from './store'
 
-Vue.config.productionTip = false
+/*Vue.config.productionTip = false
 
 Vue.filter('formatTime', function (date) {
   if (!date) return ''
@@ -20,9 +20,12 @@ Vue.filter('formatTime', function (date) {
   seconds = seconds < 10 ? '0' + seconds : seconds;
 
   return `${hours}:${minutes}:${seconds} ${ampm}`;
-})
+})*/
 
-new Vue({
-  store,
-  render: h => h(App)
-}).$mount('#app')
+const app = createApp({
+  render: () => h(App)
+});
+
+app.use(store);
+
+app.mount("#app");
