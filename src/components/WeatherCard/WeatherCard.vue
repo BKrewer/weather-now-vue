@@ -34,7 +34,7 @@
             >hPa
           </div>
         </div>
-        <span class="weather-card__updated">Updated at {{ updatedAt | formatTime }}</span>
+        <span class="weather-card__updated">Updated at {{ formatTime(updatedAt) }}</span>
       </div>
     </div>
   </div>
@@ -44,6 +44,7 @@
 import { mapState } from "vuex";
 import AppLoading from "../AppLoading/AppLoading.vue";
 import WeatherError from "../WeatherError/WeatherError.vue";
+import { formatTime } from "@/utils/filters";
 
 export default {
   components: {
@@ -78,6 +79,7 @@ export default {
     },
   },
   methods: {
+    formatTime,
     emitNewRequest() {
       this.$emit("newRequest");
     },
