@@ -15,7 +15,7 @@ module.exports = {
           ...options,
           compilerOptions: {
             compatConfig: {
-              MODE: 2
+              MODE: 3
             }
           }
         }
