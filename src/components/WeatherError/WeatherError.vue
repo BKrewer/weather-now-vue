@@ -9,7 +9,8 @@
 export default {
     methods: {
         emitNewRequest() {
-            this.$emit('newRequest');
+          // TODO: evento
+          // this.$emit('newRequest');
         }
     }
 }

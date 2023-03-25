@@ -41,10 +41,11 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { useStore } from 'vuex'
 import AppLoading from "../AppLoading/AppLoading.vue";
 import WeatherError from "../WeatherError/WeatherError.vue";
 import { formatTime } from "@/utils/filters";
+import { computed, reactive } from 'vue';
 
 export default {
   components: {
@@ -57,33 +58,48 @@ export default {
       default: () => {},
     },
   },
-  data() {
+  setup(props) {
+    const state = reactive({
+       showAddInfo: false,
+    })
+
+    const temperatureClass = computed({
+      get() {
+        const temp = props.cardData?.temp;
+
+        if (temp <= 5) {
+          return "weather-card__temperature--cold";
+        }
+
+        if (temp > 25) {
+          return "weather-card__temperature--hot";
+        }
+
+        return "";
+      }
+    })
+
+    const store = useStore()
+
+    const loading = computed(() => store.getters.loading);
+    const error = computed(() => store.getters.error);
+    const updatedAt = computed(() => store.getters.updatedAt);
+
+    function emitNewRequest() {
+      // TODO: evento
+      // this.$emit("newRequest");
+    }
+
     return {
-      showAddInfo: false,
-    };
-  },
-  computed: {
-    ...mapState(["loading", "error", 'updatedAt']),
-    temperatureClass() {
-      const temp = this.cardData.temp;
-
-      if (temp <= 5) {
-        return "weather-card__temperature--cold";
-      }
-
-      if (temp > 25) {
-        return "weather-card__temperature--hot";
-      }
-
-      return "";
-    },
-  },
-  methods: {
-    formatTime,
-    emitNewRequest() {
-      this.$emit("newRequest");
-    },
-  },
+      state,
+      temperatureClass,
+      loading,
+      error,
+      updatedAt,
+      formatTime,
+      emitNewRequest
+    }
+  }
 };
 </script>
 

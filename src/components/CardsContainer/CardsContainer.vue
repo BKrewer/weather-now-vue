@@ -4,7 +4,7 @@
       v-for="weather in weatherData"
       :key="weather.city"
       :cardData="weather"
-      @newRequest="requestWeather"
+      @newRequest="requestWeatherData"
     />
   </section>
 </template>
@@ -12,38 +12,41 @@
 <script>
 import WeatherCard from "@/components/WeatherCard/WeatherCard.vue";
 
-import { mapActions, mapState } from "vuex";
+import { useStore } from 'vuex'
+import { onMounted, watch, computed } from 'vue';
 
 const { VUE_APP_TIMER_CACHE } = process.env;
+const CITIES_LIST = "3421319,3445709,184745";
 
 export default {
   components: {
     WeatherCard,
   },
-  data() {
-    return {
-      citiesList: "3421319,3445709,184745"
+  setup() {
+    const store = useStore();
+
+    const weatherData = computed(() => store.getters.weatherData)
+    const updatedAt = computed(() => store.getters.updatedAt)
+
+    const requestWeatherData = () => {
+      store.dispatch('requestWeatherData', CITIES_LIST)
     }
-  },
-  computed: {
-    ...mapState(["weatherData", "updatedAt"]),
-  },
-  mounted() {
-    this.requestWeather();
-  },
-  watch: {
-    updatedAt() {
+
+    onMounted(() => {
+      requestWeatherData();
+    })
+
+    watch(() => updatedAt, () => {
       setInterval(() => {
         this.requestWeather();
       }, VUE_APP_TIMER_CACHE);
-    },
-  },
-  methods: {
-    ...mapActions(["requestWeatherData"]),
-    requestWeather() {
-      this.requestWeatherData(this.citiesList);
-    },
-  },
+    })
+
+    return {
+      weatherData,
+      requestWeatherData
+    }
+  }
 };
 </script>
 
