@@ -6,11 +6,12 @@
 </template>
 
 <script>
+import bus from '../../utils/bus'
+
 export default {
     methods: {
         emitNewRequest() {
-          // TODO: evento
-          // this.$emit('newRequest');
+          bus.emit('newRequest')
         }
     }
 }

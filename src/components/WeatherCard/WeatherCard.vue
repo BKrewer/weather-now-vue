@@ -46,6 +46,7 @@ import AppLoading from "../AppLoading/AppLoading.vue";
 import WeatherError from "../WeatherError/WeatherError.vue";
 import { formatTime } from "@/utils/filters";
 import { computed, reactive } from 'vue';
+import bus from '../../utils/bus'
 
 export default {
   components: {
@@ -81,13 +82,12 @@ export default {
 
     const store = useStore()
 
-    const loading = computed(() => store.getters.loading);
-    const error = computed(() => store.getters.error);
-    const updatedAt = computed(() => store.getters.updatedAt);
+    const loading = computed(() => store.state.loading);
+    const error = computed(() => store.state.error);
+    const updatedAt = computed(() => store.state.updatedAt);
 
     function emitNewRequest() {
-      // TODO: evento
-      // this.$emit("newRequest");
+      bus.emit("newRequest");
     }
 
     return {

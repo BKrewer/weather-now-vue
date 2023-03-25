@@ -25,8 +25,8 @@ export default {
   setup() {
     const store = useStore();
 
-    const weatherData = computed(() => store.getters.weatherData)
-    const updatedAt = computed(() => store.getters.updatedAt)
+    const weatherData = computed(() => store.state.weatherData)
+    const updatedAt = computed(() => store.state.updatedAt)
 
     const requestWeatherData = () => {
       store.dispatch('requestWeatherData', CITIES_LIST)
