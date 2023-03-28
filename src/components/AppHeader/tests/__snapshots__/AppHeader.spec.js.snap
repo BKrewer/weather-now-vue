@@ -7,7 +7,7 @@ exports[`AppHeader.vue renders correctly 1`] = `
   <img
     alt="Weathernow"
     class="app-header__logo"
-    src="@/assets/images/logo.svg"
+    src=""
   />
 </header>
 `;

@@ -4,6 +4,7 @@ exports[`CardsContainer.vue renders correctly 1`] = `
 <section
   class="cards-container"
 >
+  
   <weather-card-stub
     carddata="[object Object]"
   />
@@ -13,5 +14,6 @@ exports[`CardsContainer.vue renders correctly 1`] = `
   <weather-card-stub
     carddata="[object Object]"
   />
+  
 </section>
 `;

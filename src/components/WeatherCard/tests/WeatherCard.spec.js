@@ -1,13 +1,8 @@
-import Vuex from 'vuex'
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { createStore } from 'vuex'
+import { shallowMount } from '@vue/test-utils'
 import WeatherCard from '@/components/WeatherCard/WeatherCard.vue'
 import AppLoading from '@/components/AppLoading/AppLoading.vue'
 import WeatherError from '@/components/WeatherError/WeatherError.vue'
-
-const localVue = createLocalVue()
-localVue.use(Vuex)
-
-localVue.filter("formatTime", (data) => data);
 
 const initialData = {
     city: "Nuuk",
@@ -22,37 +17,37 @@ const cardData = {
     temp: 5
 }
 
-describe('WeatherCard.vue', () => {
-    let store
-    let state
-    beforeEach(() => {
-        state = {
+const store = createStore({
+    state() {
+        return {
             loading: false,
             error: false,
-            updatedAt: null,
+            updatedAt: null
         }
-        store = new Vuex.Store({
-            state
-        })
-    })
+    },
+})
 
+describe('WeatherCard.vue', () => {
     it('renders with WeatherError component', () => {
-        state.error = true;
-        const wrapper = shallowMount(WeatherCard, { propsData: { cardData: initialData }, store, localVue })
+        store.state.error = true;
+        const wrapper = shallowMount(WeatherCard, { props: { cardData: initialData }, global: { plugins: [store] } })
 
         const weatherError = wrapper.findComponent(WeatherError)
         expect(weatherError.exists()).toBe(true)
     })
     it('renders with AppLoading container', () => {
-        state.loading = true;
-        const wrapper = shallowMount(WeatherCard, { propsData: { cardData: initialData }, store, localVue })
+        store.state.loading = true;
+        const wrapper = shallowMount(WeatherCard, { props: { cardData: initialData }, global: { plugins: [store] } })
 
         const appLoading = wrapper.findComponent(AppLoading)
         expect(appLoading.exists()).toBe(true)
     })
     it('renders with card data', () => {
-        state.updatedAt = new Date();
-        const wrapper = shallowMount(WeatherCard, { propsData: { cardData }, store, localVue })
+        store.state.updatedAt = new Date();
+        store.state.error = false;
+        store.state.loading = false;
+        
+        const wrapper = shallowMount(WeatherCard, { props: { cardData }, global: { plugins: [store] } })
 
         const contentData = wrapper.find('.weather-card__content')
         expect(contentData.exists()).toBe(true)

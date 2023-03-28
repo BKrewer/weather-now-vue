@@ -11,7 +11,7 @@
       </h2>
     </div>
 
-    <weather-error v-if="error && !loading" @newRequest="emitNewRequest" />
+    <weather-error v-if="error && !loading" />
 
     <app-loading v-if="loading" />
 
@@ -34,16 +34,18 @@
             >hPa
           </div>
         </div>
-        <span class="weather-card__updated">Updated at {{ updatedAt | formatTime }}</span>
+        <span class="weather-card__updated">Updated at {{ formatTime(updatedAt) }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { useStore } from 'vuex'
 import AppLoading from "../AppLoading/AppLoading.vue";
 import WeatherError from "../WeatherError/WeatherError.vue";
+import { formatTime } from "@/utils/filters";
+import { computed, reactive } from 'vue';
 
 export default {
   components: {
@@ -56,32 +58,42 @@ export default {
       default: () => {},
     },
   },
-  data() {
+  setup(props) {
+    const state = reactive({
+       showAddInfo: false,
+    })
+
+    const temperatureClass = computed({
+      get() {
+        const temp = props.cardData?.temp;
+
+        if (temp <= 5) {
+          return "weather-card__temperature--cold";
+        }
+
+        if (temp > 25) {
+          return "weather-card__temperature--hot";
+        }
+
+        return "";
+      }
+    })
+
+    const store = useStore()
+
+    const loading = computed(() => store.state.loading);
+    const error = computed(() => store.state.error);
+    const updatedAt = computed(() => store.state.updatedAt);
+
     return {
-      showAddInfo: false,
-    };
-  },
-  computed: {
-    ...mapState(["loading", "error", 'updatedAt']),
-    temperatureClass() {
-      const temp = this.cardData.temp;
-
-      if (temp <= 5) {
-        return "weather-card__temperature--cold";
-      }
-
-      if (temp > 25) {
-        return "weather-card__temperature--hot";
-      }
-
-      return "";
-    },
-  },
-  methods: {
-    emitNewRequest() {
-      this.$emit("newRequest");
-    },
-  },
+      state,
+      temperatureClass,
+      loading,
+      error,
+      updatedAt,
+      formatTime
+    }
+  }
 };
 </script>
 

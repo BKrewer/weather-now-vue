@@ -1,30 +1,28 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
+import { createStore } from 'vuex'
 import { requestWeather, formatData } from "@/services/weatherService";
 import { saveCacheData, getValidCache } from "@/services/cacheService"
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-  state: {
-    weatherData: [
-      {
-        city: 'Nuuk',
-        country: 'GL'
-      },
-      {
-        city: 'Urubici',
-        country: 'BR'
-      },
-      {
-        city: 'Nairobi',
-        country: 'KE'
-      }
-    ],
-    loading: false,
-    error: false,
-    updatedAt: null,
+export const store = createStore({
+  state() {
+    return {
+      weatherData: [
+        {
+          city: 'Nuuk',
+          country: 'GL'
+        },
+        {
+          city: 'Urubici',
+          country: 'BR'
+        },
+        {
+          city: 'Nairobi',
+          country: 'KE'
+        }
+      ],
+      loading: false,
+      error: false,
+      updatedAt: null,
+    }
   },
   mutations: {
     setWeatherData(state, payload) {
