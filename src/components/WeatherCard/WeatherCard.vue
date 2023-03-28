@@ -11,7 +11,7 @@
       </h2>
     </div>
 
-    <weather-error v-if="error && !loading" @newRequest="emitNewRequest" />
+    <weather-error v-if="error && !loading" />
 
     <app-loading v-if="loading" />
 
@@ -46,7 +46,6 @@ import AppLoading from "../AppLoading/AppLoading.vue";
 import WeatherError from "../WeatherError/WeatherError.vue";
 import { formatTime } from "@/utils/filters";
 import { computed, reactive } from 'vue';
-import bus from '../../utils/bus'
 
 export default {
   components: {
@@ -86,18 +85,13 @@ export default {
     const error = computed(() => store.state.error);
     const updatedAt = computed(() => store.state.updatedAt);
 
-    function emitNewRequest() {
-      bus.emit("newRequest");
-    }
-
     return {
       state,
       temperatureClass,
       loading,
       error,
       updatedAt,
-      formatTime,
-      emitNewRequest
+      formatTime
     }
   }
 };

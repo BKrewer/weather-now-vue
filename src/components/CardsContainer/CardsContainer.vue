@@ -4,7 +4,6 @@
       v-for="weather in weatherData"
       :key="weather.city"
       :cardData="weather"
-      @newRequest="requestWeatherData"
     />
   </section>
 </template>
